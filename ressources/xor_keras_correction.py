@@ -10,6 +10,8 @@ from sklearn.model_selection import train_test_split
 # fix random seed for reproducibility
 from tensorflow.python.framework.random_seed import set_random_seed
 
+from tensorflow.keras.optimizers import Adam
+
 seed = 0
 np.random.seed(seed)
 set_random_seed(seed)
@@ -43,7 +45,7 @@ E_train, E_test, Y_train, Y_test = train_test_split(Et, Y, test_size=0.33, rando
 model = Sequential()
 model.add(Dense(3, input_dim=2, activation='sigmoid'))
 model.add(Dense(1, activation='sigmoid'))
-opt = optimizers.SGD(learning_rate=0.9, decay=0, momentum=0.2)
+opt = Adam(learning_rate=0.05) #optimizers.SGD(learning_rate=0.8, decay=0, momentum=0.2)
 model.compile(loss='mean_squared_error', optimizer=opt, metrics=['acc'])
 # print model in .png file
 #plot_model(model)
