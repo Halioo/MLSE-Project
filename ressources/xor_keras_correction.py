@@ -2,10 +2,10 @@ import timeit
 
 import matplotlib.pyplot as plt
 import numpy as np
-from keras import optimizers
-from keras.layers import Dense
-from keras.models import Sequential
-from keras.utils import plot_model  # install graphviz on OS
+from tensorflow.keras import optimizers
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.utils import plot_model  # install graphviz on OS
 from sklearn.model_selection import train_test_split
 # fix random seed for reproducibility
 from tensorflow.python.framework.random_seed import set_random_seed
@@ -36,14 +36,14 @@ for n_exe in range(0, E.shape[1]):
 # plt.legend(('E1','E2','Y'))
 
 # Data cleanning, need to transpose E
-Et=E.transpose()
+Et = E.transpose()
 E_train, E_test, Y_train, Y_test = train_test_split(Et, Y, test_size=0.33, random_state=seed)
 
 # create model
 model = Sequential()
 model.add(Dense(3, input_dim=2, activation='sigmoid'))
 model.add(Dense(1, activation='sigmoid'))
-opt = optimizers.SGD(lr=0.9, decay=0, momentum=0.2)
+opt = optimizers.SGD(learning_rate=0.9, decay=0, momentum=0.2)
 model.compile(loss='mean_squared_error', optimizer=opt, metrics=['acc'])
 # print model in .png file
 #plot_model(model)
